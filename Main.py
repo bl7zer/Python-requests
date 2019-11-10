@@ -8,6 +8,16 @@ def main_VkBot():
         vk._auth_token()
         vk.get_api()
         longpoll = VkBotLongPoll(vk, "id вашей группы"(Как число, не строка))
+        
+        help_set = {"help", "помощь", "команды", "начать"}
+        #Сообщение с функциями бота
+        def help():
+            helpcommands = "Команды: (+команды вашего бота)"
+            vk.method('messages.send', {
+                "peer_id": event.object.peer_id,
+                "message": helpcommands,
+                "random_id": 0
+            })
     
         #Кидает рандомное видео с группы
         def random_video():
@@ -85,7 +95,9 @@ def main_VkBot():
         while True:
             for event in longpoll.listen():
                 if event.type == VkBotEventType.MESSAGE_NEW:
-                    if event.object.text.lower() == "random video":
+                    if event.object.text.lower() in help_set:
+                        help()
+                    elif event.object.text.lower() == "random video":
                         random_video()
                     elif event.object.text.lower().startswith("random_doc"):
                         random_doc()
