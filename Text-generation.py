@@ -5,7 +5,7 @@ url = 'https://models.dobro.ai/gpt2/medium/' #link to post request (link to neur
 data = ({
     "prompt": "your text (begin story)",
     "length": 50, #text max lendth
-    "num_samples": 5 #nums of examples
+    "num_samples": 5, #nums of examples
 })
 
 text = post(url, json=data).text
